@@ -54,6 +54,7 @@ public class App
                 if (value.equalsIgnoreCase("o") || value.equalsIgnoreCase("x")) {
                     if (position  >= 1 && position <= 7) {
                         rowOne.replace(rowOne.indexOf(Integer.toString(position)), rowOne.indexOf(Integer.toString(position)) + 1, value.toUpperCase());
+                        System.out.println(position - 1);
                         boardCellValArr[position - 1] = value.toUpperCase();
                     } else if (position  >= 8 && position <= 14) {
                         if (position  > 9) {
@@ -61,18 +62,23 @@ public class App
                         } else {
                             rowTwo.replace(rowTwo.indexOf(Integer.toString(position)), rowTwo.indexOf(Integer.toString(position)) + 1, value.toUpperCase());
                         }
+                        System.out.println(position - 1);
                         boardCellValArr[position - 1] = value.toUpperCase();
                     } else if (position  >= 15 && position <= 21) {
                         rowThree.replace(rowThree.indexOf(Integer.toString(position)), rowThree.indexOf(Integer.toString(position)) + 2, value.toUpperCase().concat(" "));
+                        System.out.println(position - 1);
                         boardCellValArr[position - 1] = value.toUpperCase();
                     } else if (position  >= 22 && position <= 28) {
                         rowFour.replace(rowFour.indexOf(Integer.toString(position)), rowFour.indexOf(Integer.toString(position)) + 2, value.toUpperCase().concat(" "));
+                        System.out.println(position - 1);
                         boardCellValArr[position - 1] = value.toUpperCase();
                     } else if (position  >= 29 && position <= 35) {
                         rowFive.replace(rowFive.indexOf(Integer.toString(position)), rowFive.indexOf(Integer.toString(position)) + 2, value.toUpperCase().concat(" "));
+                        System.out.println(position - 1);
                         boardCellValArr[position - 1] = value.toUpperCase();
                     } else {
                         rowSix.replace(rowSix.indexOf(Integer.toString(position)), rowSix.indexOf(Integer.toString(position)) + 2, value.toUpperCase().concat(" "));
+                        System.out.println(position - 1);
                         boardCellValArr[position - 1] = value.toUpperCase();
                     }
                     System.out.println(rowBorder);
@@ -95,23 +101,36 @@ public class App
 
     public static boolean result(String[] boardCellValArr) {
         boolean result = true;
-        for(int i = 0; i + 3 < boardCellValArr.length; i++) {
+        for(int i = 0; (i + 1) < boardCellValArr.length &&
+                (i + 2) < boardCellValArr.length &&
+                (i + 3) < boardCellValArr.length; i++) {
            if (boardCellValArr[i] != null &&
                boardCellValArr[i + 1] != null &&
                boardCellValArr[i + 2] != null &&
-               boardCellValArr[i + 3] != null
-
-           ) {
-               if (
-                       boardCellValArr[i].contains("O") &&
-                       boardCellValArr[i + 1].contains("O") &&
-                       boardCellValArr[i + 2].contains("O") &&
-                       boardCellValArr[i + 3].contains("O") ||
-                       boardCellValArr[i].contains("X") &&
-                       boardCellValArr[i + 1].contains("X") &&
-                       boardCellValArr[i + 2].contains("X") &&
-                       boardCellValArr[i + 3].contains("X")
-               ) {
+               boardCellValArr[i + 3] != null &&
+               i + 1 != 7 &&
+               i + 2 != 7 &&
+               i + 3 != 7 &&
+               i + 1 != 14 &&
+               i + 2 != 14 &&
+               i + 3 != 14 &&
+               i + 1 !=  21 &&
+               i + 2 !=  21 &&
+               i + 3 !=  21 &&
+               i + 1 != 28 &&
+               i + 2 != 28 &&
+               i + 3 != 28 &&
+               i + 1 != 35 &&
+               i + 2 != 35 &&
+               i + 3 != 35) {
+               if (boardCellValArr[i].contains("O") &&
+                   boardCellValArr[i + 1].contains("O") &&
+                   boardCellValArr[i + 2].contains("O") &&
+                   boardCellValArr[i + 3].contains("O") ||
+                   boardCellValArr[i].contains("X") &&
+                   boardCellValArr[i + 1].contains("X") &&
+                   boardCellValArr[i + 2].contains("X") &&
+                   boardCellValArr[i + 3].contains("X")) {
                    result = false;
                }
            }
