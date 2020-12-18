@@ -4,6 +4,36 @@ import java.util.Scanner;
 
 public class ConnectingFour {
 
+    private String result;
+    private Integer playerOneWinCounter;
+    private Integer playerTwoWinCounter;
+    Integer countPlayerOnesWin = 0;
+    Integer countPlayerTwosWin = 0;
+
+    public String getResult() {
+        return this.result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public Integer getPlayerOneWinCounter() {
+        return this.playerOneWinCounter;
+    }
+
+    public void setPlayerOneWinCounter(Integer playerOneWinCounter) {
+        this.playerOneWinCounter = playerOneWinCounter;
+    }
+
+    public Integer getPlayerTwoWinCounter() {
+        return this.playerTwoWinCounter;
+    }
+
+    public void setPlayerTwoWinCounter(Integer playerTwoWinCounter) {
+        this.playerTwoWinCounter = playerTwoWinCounter;
+    }
+
     public String initConnectingFour() {
         String[] boardCellValArr = new String[42];
         StringBuilder rowBorder = new StringBuilder();
@@ -46,7 +76,7 @@ public class ConnectingFour {
                 checkInverseDiagonalMatchForPlayerTwo(boardCellValArr) &&
                 checkIfDrawn(boardCellValArr)) {
             int position = 0;
-            System.out.println("Please enter your desired position between 1 and 42,\n if any of them is not already occupied by O or X: ");
+            System.out.println("\nPlease enter your desired position between 1 and 42,\n if any of them is not already occupied by O or X: ");
             position = posInput.nextInt();
             if (position >= 1 && position <= 42) {
                 String value = "";
@@ -90,36 +120,44 @@ public class ConnectingFour {
                     System.out.println(rowSix);
                     System.out.println(rowBorder);
                     if (checkHorizontalMatchForPlayerOne(boardCellValArr) == false) {
-                        result = "Player one with yellow pointer O won the match";
+                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkHorizontalMatchForPlayerTwo(boardCellValArr) == false) {
-                        result = "Player two with red pointer X won the match";
+                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkVerticalMatchForPlayerOne(boardCellValArr) == false) {
-                        result = "Player one with yellow pointer O won the match";
+                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkVerticalMatchForPlayerTwo(boardCellValArr) == false) {
-                        result = "Player two with red pointer X won the match";
+                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkDiagonalMatchForPlayerOne(boardCellValArr) == false) {
-                        result = "Player one with yellow pointer O won the match";
+                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkDiagonalMatchForPlayerTwo(boardCellValArr) == false) {
-                        result = "Player two with red pointer X won the match";
+                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkInverseDiagonalMatchForPlayerOne(boardCellValArr) == false) {
-                        System.out.println("Player one with yellow pointer O won the match");
+                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkInverseDiagonalMatchForPlayerTwo(boardCellValArr) == false) {
-                        result = "Player two with red pointer X won the match";
+                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkIfDrawn(boardCellValArr) == false) {
-                        result = "Match drawn";
+                        setResult("\nRound drawn");
                     };
                 }
             }
         }
-        return result;
+        return getResult();
     }
 
     public boolean checkHorizontalMatchForPlayerOne(String[] boardCellValArr) {
