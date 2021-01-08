@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class ConnectingFour {
 
     private String result;
+    private Integer moveCounter;
     private Integer playerOneWinCounter;
     private Integer playerTwoWinCounter;
+    Integer countMove = 0;
     Integer countPlayerOnesWin = 0;
     Integer countPlayerTwosWin = 0;
 
@@ -16,6 +18,14 @@ public class ConnectingFour {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public Integer getMoveCounter() {
+        return this.moveCounter;
+    }
+
+    public void setMoveCounter(Integer moveCounter) {
+        this.moveCounter = moveCounter;
     }
 
     public Integer getPlayerOneWinCounter() {
@@ -83,6 +93,7 @@ public class ConnectingFour {
                 System.out.println("Please enter O for yellow or X for red: ");
                 value = valInput.nextLine();
                 if (value.equalsIgnoreCase("o") || value.equalsIgnoreCase("x")) {
+                    setMoveCounter(countMove += 1);
                     if (position  >= 1 && position <= 7) {
                         rowOne.replace(rowOne.indexOf(Integer.toString(position)), rowOne.indexOf(Integer.toString(position)) + 1, value.toUpperCase());
                         boardCellValArr[position - 1] = value.toUpperCase();
@@ -120,39 +131,39 @@ public class ConnectingFour {
                     System.out.println(rowSix);
                     System.out.println(rowBorder);
                     if (checkHorizontalMatchForPlayerOne(boardCellValArr) == false) {
-                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkHorizontalMatchForPlayerTwo(boardCellValArr) == false) {
-                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkVerticalMatchForPlayerOne(boardCellValArr) == false) {
-                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkVerticalMatchForPlayerTwo(boardCellValArr) == false) {
-                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkDiagonalMatchForPlayerOne(boardCellValArr) == false) {
-                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkDiagonalMatchForPlayerTwo(boardCellValArr) == false) {
-                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkInverseDiagonalMatchForPlayerOne(boardCellValArr) == false) {
-                        setResult("\nPlayer one (with yellow pointer O) won the round");
+                        setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkInverseDiagonalMatchForPlayerTwo(boardCellValArr) == false) {
-                        setResult("\nPlayer two (with red pointer X) won the round");
+                        setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkIfDrawn(boardCellValArr) == false) {
-                        setResult("\nRound drawn");
+                        setResult("\nRound drawn after " + getMoveCounter() + " moves.");
                     };
                 }
             }

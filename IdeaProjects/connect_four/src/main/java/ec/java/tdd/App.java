@@ -23,11 +23,31 @@ public class App
             System.out.println("\n If you want to play again then please press y,\n otherwise press n:");
             String playersOpinion = playAgain.nextLine();
             if (playersOpinion.equalsIgnoreCase("n")) {
-                if (connectingFourGame.getPlayerOneWinCounter() > connectingFourGame.getPlayerTwoWinCounter()) {
+                if (connectingFourGame.getPlayerOneWinCounter() != null &&
+                connectingFourGame.getPlayerTwoWinCounter() != null &&
+                connectingFourGame.getPlayerOneWinCounter() > connectingFourGame.getPlayerTwoWinCounter()) {
                     System.out.println("\nPlayer one win the game:)");
-                } else if (connectingFourGame.getPlayerOneWinCounter() == connectingFourGame.getPlayerTwoWinCounter()) {
+                }
+                if (connectingFourGame.getPlayerOneWinCounter() != null &&
+                connectingFourGame.getPlayerTwoWinCounter() != null &&
+                connectingFourGame.getPlayerOneWinCounter() == connectingFourGame.getPlayerTwoWinCounter()
+                ) {
                     System.out.println("\nMatch drawn.");
-                } else {
+                }
+                if (connectingFourGame.getPlayerOneWinCounter() != null &&
+                connectingFourGame.getPlayerTwoWinCounter() != null &&
+                connectingFourGame.getPlayerTwoWinCounter() > connectingFourGame.getPlayerOneWinCounter()
+                ) {
+                    System.out.println("\nPlayer two won the game:)");
+                }
+                if (connectingFourGame.getPlayerOneWinCounter() != null &&
+                    connectingFourGame.getPlayerTwoWinCounter() == null
+                ) {
+                    System.out.println("\nPlayer one win the game:)");
+                }
+                if (connectingFourGame.getPlayerOneWinCounter() == null &&
+                    connectingFourGame.getPlayerTwoWinCounter() != null
+                ) {
                     System.out.println("\nPlayer two won the game:)");
                 }
                 playAnotherRound = false;
