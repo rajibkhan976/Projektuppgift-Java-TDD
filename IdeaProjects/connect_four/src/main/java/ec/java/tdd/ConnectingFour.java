@@ -1,5 +1,7 @@
 package ec.java.tdd;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ConnectingFour {
@@ -8,9 +10,12 @@ public class ConnectingFour {
     private Integer moveCounter;
     private Integer playerOneWinCounter;
     private Integer playerTwoWinCounter;
-    Integer countMove = 0;
+    private ArrayList<Integer> storedPlayerOneMoves;
+    private ArrayList<Integer> storedPlayerTwoMoves;
     Integer countPlayerOnesWin = 0;
     Integer countPlayerTwosWin = 0;
+    ArrayList<Integer> playerOneMoveArr = new ArrayList<Integer>();
+    ArrayList<Integer> playerTwoMoveArr = new ArrayList<Integer>();
 
     public String getResult() {
         return this.result;
@@ -42,6 +47,22 @@ public class ConnectingFour {
 
     public void setPlayerTwoWinCounter(Integer playerTwoWinCounter) {
         this.playerTwoWinCounter = playerTwoWinCounter;
+    }
+
+    public ArrayList<Integer> getStoredPlayerOneMoves() {
+        return this.storedPlayerOneMoves;
+    }
+
+    public void setStoredPlayerOneMoves(ArrayList<Integer> storedPlayerOneMoves) {
+        this.storedPlayerOneMoves = storedPlayerOneMoves;
+    }
+
+    public ArrayList<Integer> getStoredPlayerTwoMoves() {
+        return this.storedPlayerTwoMoves;
+    }
+
+    public void setStoredPlayerTwoMoves(ArrayList<Integer> storedPlayerTwoMoves) {
+        this.storedPlayerTwoMoves = storedPlayerTwoMoves;
     }
 
     public String initConnectingFour() {
@@ -76,6 +97,7 @@ public class ConnectingFour {
         Scanner posInput = new Scanner(System.in);
         Scanner valInput = new Scanner(System.in);
         String result = "";
+        int countMove = 0;
         while (checkHorizontalMatchForPlayerOne(boardCellValArr) &&
                 checkHorizontalMatchForPlayerTwo(boardCellValArr) &&
                 checkVerticalMatchForPlayerOne(boardCellValArr) &&
@@ -93,6 +115,14 @@ public class ConnectingFour {
                 System.out.println("Please enter O for yellow or X for red: ");
                 value = valInput.nextLine();
                 if (value.equalsIgnoreCase("o") || value.equalsIgnoreCase("x")) {
+                    if (value.equalsIgnoreCase("o")) {
+                        playerOneMoveArr.add(position);
+                        setStoredPlayerOneMoves(playerOneMoveArr);
+                    }
+                    if (value.equalsIgnoreCase("x")) {
+                        playerTwoMoveArr.add(position);
+                        setStoredPlayerTwoMoves(playerTwoMoveArr);
+                    }
                     setMoveCounter(countMove += 1);
                     if (position  >= 1 && position <= 7) {
                         rowOne.replace(rowOne.indexOf(Integer.toString(position)), rowOne.indexOf(Integer.toString(position)) + 1, value.toUpperCase());
@@ -132,34 +162,114 @@ public class ConnectingFour {
                     System.out.println(rowBorder);
                     if (checkHorizontalMatchForPlayerOne(boardCellValArr) == false) {
                         setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkHorizontalMatchForPlayerTwo(boardCellValArr) == false) {
                         setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkVerticalMatchForPlayerOne(boardCellValArr) == false) {
                         setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkVerticalMatchForPlayerTwo(boardCellValArr) == false) {
                         setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkDiagonalMatchForPlayerOne(boardCellValArr) == false) {
                         setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkDiagonalMatchForPlayerTwo(boardCellValArr) == false) {
                         setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkInverseDiagonalMatchForPlayerOne(boardCellValArr) == false) {
                         setResult("\nPlayer one (with yellow pointer O) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerOneWinCounter(countPlayerOnesWin += 1);
                     };
                     if (checkInverseDiagonalMatchForPlayerTwo(boardCellValArr) == false) {
                         setResult("\nPlayer two (with red pointer X) won the round after " + getMoveCounter() + " moves.");
+                        if (getStoredPlayerOneMoves() != null && getStoredPlayerOneMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer one's positions were " + Arrays.toString(getStoredPlayerOneMoves().toArray()) + ".");
+                            playerOneMoveArr.clear();
+                            setStoredPlayerOneMoves(playerOneMoveArr);
+                        }
+                        if (getStoredPlayerTwoMoves() != null && getStoredPlayerTwoMoves().toArray().length != 0) {
+                            System.out.println("\nPlayer two's positions were " + Arrays.toString(getStoredPlayerTwoMoves().toArray()) + ".");
+                            playerTwoMoveArr.clear();
+                            setStoredPlayerTwoMoves(playerTwoMoveArr);
+                        }
                         setPlayerTwoWinCounter(countPlayerTwosWin += 1);
                     };
                     if (checkIfDrawn(boardCellValArr) == false) {
